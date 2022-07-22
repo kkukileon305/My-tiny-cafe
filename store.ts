@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { isTakeout } from './slices/isTakeout';
+import { cartList } from './slices/cartList';
 
 export const store = configureStore({
   reducer: {
     isTakeout: isTakeout.reducer,
+    cartList: cartList.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
