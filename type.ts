@@ -1,13 +1,13 @@
-export type CoffeeItem = {
+export type Item = {
   krName: string;
   enName: string;
   description: string;
   price: number;
-  imageUrl?: string;
+  imageUrl: string;
 };
 
 export type PickedItem = {
-  item: CoffeeItem;
+  item: Item;
   isIce: boolean;
   isSizeUp: boolean;
 };

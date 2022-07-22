@@ -1,18 +1,9 @@
 import coffeeData from './coffeeData.json';
+import { Item } from './type';
 
 interface CoffeeData {
-  coffee: {
-    krName: string;
-    enName: string;
-    description: string;
-    price: number;
-  }[];
-  drink: {
-    krName: string;
-    enName: string;
-    description: string;
-    price: number;
-  }[];
+  coffee: Item[];
+  drink: Item[];
 }
 
 const getCoffeeData = () =>
