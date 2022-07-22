@@ -6,7 +6,7 @@ export const isTakeout = createSlice({
   name: 'takeout',
   initialState,
   reducers: {
-    setTakeout: (state, { payload }: PayloadAction<boolean>) => {
+    setTakeout: (_, { payload }: PayloadAction<boolean>) => {
       return payload;
     },
   },

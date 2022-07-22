@@ -3,6 +3,7 @@ export type CoffeeItem = {
   enName: string;
   description: string;
   price: number;
+  imageUrl?: string;
 };
 
 export type PickedItem = {

@@ -13,7 +13,7 @@ export const cartList = createSlice({
     removeItem(state, { payload }: PayloadAction<number>) {
       return state.filter((_, i) => payload !== i);
     },
-    removeItemAll(state) {
+    removeItemAll() {
       return [];
     },
   },
