@@ -27,6 +27,34 @@
       "description": "부드러운 우유와 달콤한 바닐라의 조합",
       "price": 2500,
       "imageUrl": "https://images.unsplash.com/photo-1592505746058-2c74be3c2155?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+    },
+    {
+      "krName": "아메리카노",
+      "enName": "Americano",
+      "description": "진한 맛의 아메리카노",
+      "price": 2000,
+      "imageUrl": "https://images.unsplash.com/photo-1519333796630-4b7d19ad1bb3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    },
+    {
+      "krName": "원억커피",
+      "enName": "Won Uk Coffee",
+      "description": "달콤한 우리 카페의 대표메뉴!",
+      "price": 2500,
+      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=721&q=80"
+    },
+    {
+      "krName": "카페라뗴",
+      "enName": "Cafe Latte",
+      "description": "부드러운 우유와 커피의 조합",
+      "price": 2500,
+      "imageUrl": "https://images.unsplash.com/photo-1621135177072-57c9b6242e7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "krName": "바닐라커피",
+      "enName": "Vanilla Latte",
+      "description": "부드러운 우유와 달콤한 바닐라의 조합",
+      "price": 2500,
+      "imageUrl": "https://images.unsplash.com/photo-1592505746058-2c74be3c2155?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
     }
   ],
   "drink": [

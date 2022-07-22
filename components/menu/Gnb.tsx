@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-const MenuTitle = ['Coffee', 'Latte', 'Drinks', 'Desserts'];
+export const MenuTitle = ['Coffee', 'Latte', 'Drinks', 'Desserts'];
 
 type GnbProps = {
   curMenu: number;

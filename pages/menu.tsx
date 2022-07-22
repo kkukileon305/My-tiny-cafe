@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Aside from '../components/menu/Aside';
-import Gnb from '../components/menu/Gnb';
+import Gnb, { MenuTitle } from '../components/menu/Gnb';
 import Header from '../components/menu/Header';
 import ItemList from '../components/menu/ItemList';
+import MenuSkeleton from '../components/menu/MenuSkeleton';
 import getCoffeeData from '../getCoffeeData';
 import StyledMenuPage from '../styles/StyledMenuPage';
 import { Item } from '../type';
@@ -11,6 +12,7 @@ import { Item } from '../type';
 const MenuPage = () => {
   const [loading, setLoading] = useState(false);
   const [curMenu, setCurMenu] = useState(0);
+  const [curMenuName, setCurMenuName] = useState('');
   const [menuList, setMenuList] = useState<Item[]>([]);
 
   useEffect(() => {
@@ -19,13 +21,14 @@ const MenuPage = () => {
       try {
         const data = await getCoffeeData();
         setMenuList(data.coffee);
+        setCurMenuName(MenuTitle[curMenu]);
         setLoading(false);
       } catch (error) {
         console.log(error);
         setLoading(true);
       }
     })();
-  }, []);
+  }, [curMenu]);
 
   return (
     <>
@@ -34,12 +37,20 @@ const MenuPage = () => {
       <StyledMenuPage>
         <div className='left'>
           <Gnb curMenu={curMenu} setCurMenu={setCurMenu} />
-          <h2>Coffee</h2>
-          <ul>
-            {menuList.map((e, i) => (
-              <ItemList key={i} item={e} />
-            ))}
-          </ul>
+          <div className='menuContainer'>
+            {loading ? (
+              <MenuSkeleton />
+            ) : (
+              <>
+                <h2>{curMenuName}</h2>
+                <ul>
+                  {menuList.map((e, i) => (
+                    <ItemList key={i} item={e} />
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
         </div>
         <Aside />
       </StyledMenuPage>

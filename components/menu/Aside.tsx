@@ -5,6 +5,10 @@ const StyledAside = styled.aside`
   width: 170px;
   height: 100%;
   background-color: ${Color.brown};
+
+  @media screen and (max-width: 570px) {
+    display: none;
+  }
 `;
 
 const Aside = () => {
