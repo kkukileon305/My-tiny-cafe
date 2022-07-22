@@ -5,6 +5,7 @@ import Gnb, { MenuTitle } from '../components/menu/Gnb';
 import Header from '../components/menu/Header';
 import ItemList from '../components/menu/ItemList';
 import MenuSkeleton from '../components/menu/MenuSkeleton';
+import MobileCart from '../components/mobile/MobileCart';
 import getCoffeeData from '../getCoffeeData';
 import StyledMenuPage from '../styles/StyledMenuPage';
 import { Item } from '../type';
@@ -32,8 +33,8 @@ const MenuPage = () => {
 
   return (
     <>
+      <MobileCart />
       <Header />
-
       <StyledMenuPage>
         <div className='left'>
           <Gnb curMenu={curMenu} setCurMenu={setCurMenu} />

@@ -41,6 +41,7 @@ const ItemList = ({ item }: ItemProps) => {
         alt='some coffee...'
         width={150}
         height={150}
+        priority={true}
       />
       <h4>{item.krName}</h4>
       <p>{item.description}</p>
