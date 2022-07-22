@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { counterSlice } from './slices/counterSlice';
-import { isTakeoutSlice } from './slices/isTakeoutSlice';
+import { isTakeout } from './slices/isTakeout';
 
 export const store = configureStore({
   reducer: {
-    takeout: isTakeoutSlice.reducer,
-    counter: counterSlice.reducer,
+    isTakeout: isTakeout.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

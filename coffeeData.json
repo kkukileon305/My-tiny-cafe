@@ -1,0 +1,42 @@
+{
+  "coffee": [
+    {
+      "krName": "아메리카노",
+      "enName": "Americano",
+      "description": "진한 맛의 아메리카노",
+      "price": 2000
+    },
+    {
+      "krName": "원억커피",
+      "enName": "Won Uk Coffee",
+      "description": "달콤한 우리 카페의 대표메뉴!",
+      "price": 2500
+    },
+    {
+      "krName": "카페라뗴",
+      "enName": "Cafe Latte",
+      "description": "부드러운 우유와 커피의 조합",
+      "price": 2500
+    },
+    {
+      "krName": "바닐라커피",
+      "enName": "Vanilla Latte",
+      "description": "부드러운 우유와 달콤한 바닐라의 조합",
+      "price": 2500
+    }
+  ],
+  "drink": [
+    {
+      "krName": "딸기라떼",
+      "enName": "Strawberry Latte",
+      "description": "달콤한 딸기 과육이 가득!",
+      "price": 3400
+    },
+    {
+      "krName": "초코라떼",
+      "enName": "Chocolate Latte",
+      "description": "달콤한 초코가 가득!",
+      "price": 3400
+    }
+  ]
+}
