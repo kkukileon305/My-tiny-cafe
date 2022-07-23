@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Color } from '../../theme';
+import { Color } from '../theme';
 
 const StyledAside = styled.aside`
   width: 170px;

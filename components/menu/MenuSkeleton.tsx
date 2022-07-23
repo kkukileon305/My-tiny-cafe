@@ -6,6 +6,10 @@ const StyledSkeleton = styled.div`
     height: 30px;
     background-color: lightgray;
     margin: 20px 30px;
+
+    @media screen and (max-width: 350px) {
+      margin: 20px 15px;
+    }
   }
 
   & > ul {
@@ -25,7 +29,7 @@ const StyledSkeleton = styled.div`
       gap: 10px;
 
       span {
-        border-radius: 75px;
+        display: block;
         background-color: lightgray;
         height: 140px;
         width: 140px;

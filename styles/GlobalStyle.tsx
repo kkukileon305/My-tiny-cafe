@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { useAppSelector } from '../hooks';
 
-const GlobalStyle = createGlobalStyle`
+const StyledGlobal = createGlobalStyle<{
+  isDark: boolean;
+}>`
   ${reset}
 
   html {
@@ -20,5 +23,20 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
   }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    color: ${({ isDark }) => (isDark ? 'white' : 'black')};
+    transition: 0.4s;
+  }
 `;
+
+const GlobalStyle = () => {
+  const isDark = useAppSelector((state) => state.isDark);
+
+  return <StyledGlobal isDark={isDark} />;
+};
 export default GlobalStyle;

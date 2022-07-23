@@ -2,8 +2,7 @@ import coffeeData from './coffeeData.json';
 import { Item } from './type';
 
 interface CoffeeData {
-  coffee: Item[];
-  drink: Item[];
+  [coffeeType: string]: Item[];
 }
 
 const getCoffeeData = () =>

@@ -1,18 +1,24 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../hooks';
 
-export const MenuTitle = ['Coffee', 'Latte', 'Drinks', 'Desserts'];
+export const MenuTitle = ['coffee', 'latte', 'drinks', 'desserts'];
 
 type GnbProps = {
   curMenu: number;
   setCurMenu: Dispatch<SetStateAction<number>>;
 };
 
-const StyledGnb = styled.div<{ curMenu: number }>`
+const StyledGnb = styled.div<{
+  curMenu: number; //
+  isDark: boolean;
+}>`
   ul {
     display: flex;
     border-bottom: 1px solid lightgray;
     position: relative;
+    transition: 0.4s;
+    background-color: ${({ isDark }) => (isDark ? '#303030' : 'white')};
 
     li {
       width: 25%;
@@ -21,13 +27,13 @@ const StyledGnb = styled.div<{ curMenu: number }>`
         font-weight: 600;
         text-align: center;
         padding: 8px 0;
-        color: lightgray;
+        color: ${({ isDark }) => (isDark ? '#646464' : 'lightgray')};
         transition: 0.4s;
       }
 
       &:nth-child(${({ curMenu }) => curMenu + 1}) {
         p {
-          color: black;
+          color: ${({ isDark }) => (isDark ? 'white' : '#222222')};
         }
       }
     }
@@ -40,15 +46,16 @@ const StyledGnb = styled.div<{ curMenu: number }>`
       width: 25%;
       height: 2px;
       transition: 0.4s;
-      background-color: black;
+      background-color: ${({ isDark }) => (isDark ? 'white' : '#222222')};
       transform: translateX(${({ curMenu }) => curMenu * 100}%);
     }
   }
 `;
 
 const Gnb = ({ curMenu, setCurMenu }: GnbProps) => {
+  const isDark = useAppSelector((state) => state.isDark);
   return (
-    <StyledGnb curMenu={curMenu}>
+    <StyledGnb curMenu={curMenu} isDark={isDark}>
       <ul>
         {MenuTitle.map((e, i) => (
           <li key={i} onClick={() => setCurMenu(i)}>

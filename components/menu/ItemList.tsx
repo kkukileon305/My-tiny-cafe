@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Item } from '../../type';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '../../hooks';
 
-const StyledItem = styled.li`
+const StyledItem = styled.li<{ isDark: boolean }>`
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -11,10 +13,6 @@ const StyledItem = styled.li`
   word-break: keep-all;
   gap: 10px;
 
-  span {
-    border-radius: 75px;
-  }
-
   h4 {
     font-weight: 600;
     margin-top: 10px;
@@ -22,7 +20,7 @@ const StyledItem = styled.li`
 
   p {
     line-height: 1.3;
-    color: lightgray;
+    color: ${({ isDark }) => (isDark ? '#666666' : 'lightgray')};
     font-weight: 600;
     font-size: 14px;
   }
@@ -30,12 +28,21 @@ const StyledItem = styled.li`
 
 type ItemProps = {
   item: Item;
-  key: number;
+  index: number;
+  curMenuName: string;
 };
 
-const ItemList = ({ item }: ItemProps) => {
+const ItemList = ({ item, curMenuName, index }: ItemProps) => {
+  const router = useRouter();
+  const isDark = useAppSelector((state) => state.isDark);
+
   return (
-    <StyledItem>
+    <StyledItem
+      onClick={() => {
+        router.push(`/details?curMenuName=${curMenuName}&index=${index}`);
+      }}
+      isDark={isDark}
+    >
       <Image //
         src={item.imageUrl}
         alt='some coffee...'

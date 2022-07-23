@@ -5,7 +5,7 @@ import StyledMainPage from '../styles/StyledMainPage';
 const Home: NextPage = () => {
   return (
     <StyledMainPage>
-      <h2>My Tiny Cafe</h2>
+      <h1>My Tiny Cafe</h1>
 
       <div className='btnContainer'>
         <Button setTake={true}>Take out</Button>
