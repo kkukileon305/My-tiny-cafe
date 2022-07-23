@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Color } from '../theme';
 
 const StyledMenuPage = styled.main<{ isDark: boolean }>`
   height: calc(100vh - 36px);
@@ -13,7 +14,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean }>`
       overflow-y: scroll;
       height: calc(100% - 33px);
       transition: 0.4s;
-      background-color: ${({ isDark }) => (isDark ? '#303030' : 'white')};
+      background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
 
       h2 {
         font-weight: 700;

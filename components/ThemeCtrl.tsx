@@ -7,19 +7,20 @@ const StyledDiv = styled.div<{ isDark: boolean }>`
   width: 50px;
   height: 20px;
   border-radius: 10px;
-  background-color: red;
-  background-color: white;
+  background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
   display: flex;
-  justify-content: ${({ isDark }) => (isDark ? 'flex-end' : 'flex-start')};
   align-items: center;
-  padding: 0 1px;
+  padding: 0 3px;
+  transition: 0.4s;
 
   button {
     border: none;
     border-radius: 10px;
-    background-color: ${Color.brown};
-    width: 18px;
-    height: 18px;
+    background-color: ${({ isDark }) => (isDark ? 'gray' : 'lightgray')};
+    width: 14px;
+    height: 14px;
+    transition: 0.4s;
+    transform: translateX(${({ isDark }) => (isDark ? '30px' : '0px')});
   }
 `;
 

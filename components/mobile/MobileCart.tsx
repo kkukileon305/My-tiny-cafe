@@ -4,7 +4,7 @@ import { VscTriangleUp } from 'react-icons/vsc';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Color } from '../../theme';
 
-const StyledMCart = styled.div<{ isDark: boolean }>`
+const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
   display: none;
 
   @media screen and (max-width: 570px) {
@@ -14,15 +14,17 @@ const StyledMCart = styled.div<{ isDark: boolean }>`
     height: calc(100vh - 30px);
     left: 1vw;
     bottom: 0px;
-    background-color: ${({ isDark }) => (isDark ? '#303030' : ' white')};
+    background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
     z-index: 9999;
     border-radius: 10px;
-    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid ${({ isDark }) => (isDark ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)')};
+    box-shadow: ${({ isDark }) => (isDark ? '' : '0 0 4px 4px rgba(0,0,0,0.1)')};
     transform: translateY(95%);
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: 0.4s;
   }
 
   h2 {
@@ -34,6 +36,8 @@ const StyledMCart = styled.div<{ isDark: boolean }>`
     position: absolute;
     left: calc(50% - 10px);
     top: 4px;
+    transition: 0.4s;
+    transform: rotate(${({ open }) => (open ? '180deg' : '0')});
   }
 
   div.cartListContainer {
@@ -53,6 +57,7 @@ const StyledMCart = styled.div<{ isDark: boolean }>`
 `;
 
 const MobileCart = () => {
+  const [open, setOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
@@ -108,8 +113,10 @@ const MobileCart = () => {
 
     if ((transY / height > 0.55 && speed > -0.4) || speed > 0.4) {
       (targetElement as HTMLElement).style.transform = `translateY(95%)`;
+      setOpen(false);
     } else if (transY / height <= 0.55 || speed < -0.4) {
       (targetElement as HTMLElement).style.transform = `translateY(0%)`;
+      setOpen(true);
     }
   };
 
@@ -121,6 +128,7 @@ const MobileCart = () => {
       ref={cartRef}
       className='mCart'
       isDark={isDark}
+      open={open}
     >
       <VscTriangleUp width={20} color='gray' />
       <h2>Cart</h2>

@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../hooks';
+import { Color } from '../../theme';
 
 export const MenuTitle = ['coffee', 'latte', 'drinks', 'desserts'];
 
@@ -18,7 +19,7 @@ const StyledGnb = styled.div<{
     border-bottom: 1px solid lightgray;
     position: relative;
     transition: 0.4s;
-    background-color: ${({ isDark }) => (isDark ? '#303030' : 'white')};
+    background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
 
     li {
       width: 25%;
