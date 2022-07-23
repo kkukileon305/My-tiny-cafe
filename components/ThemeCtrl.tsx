@@ -29,12 +29,13 @@ const ThemeCtrl = () => {
   const isDark = useAppSelector((state) => state.isDark);
 
   return (
-    <StyledDiv isDark={isDark}>
-      <button
-        onClick={() => {
-          dispatch(toggleTheme());
-        }}
-      />
+    <StyledDiv
+      isDark={isDark}
+      onClick={() => {
+        dispatch(toggleTheme());
+      }}
+    >
+      <button />
     </StyledDiv>
   );
 };
