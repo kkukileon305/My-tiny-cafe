@@ -22,6 +22,7 @@ const StyledGlobal = createGlobalStyle<{
   * {
     font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
+    word-break: keep-all;
   }
 
   h2,

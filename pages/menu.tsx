@@ -10,6 +10,7 @@ import getCoffeeData from '../getCoffeeData';
 import StyledMenuPage from '../styles/StyledMenuPage';
 import { Item } from '../type';
 import { useAppDispatch, useAppSelector } from '../hooks';
+import { setIsMessage } from '../slices/message';
 
 const MenuPage = () => {
   const [loading, setLoading] = useState(true);
@@ -17,6 +18,13 @@ const MenuPage = () => {
   const [curMenuName, setCurMenuName] = useState(MenuTitle[curMenu]);
   const [menuList, setMenuList] = useState<Item[]>([]);
   const isDark = useAppSelector((state) => state.isDark);
+  const dispatch = useAppDispatch();
+
+  const isChange = useAppSelector((state) => state.message.isChange);
+
+  useEffect(() => {
+    isChange && dispatch(setIsMessage(true));
+  }, []);
 
   useEffect(() => {
     (async () => {

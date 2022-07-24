@@ -1,8 +1,12 @@
-import { TouchEventHandler, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, TouchEventHandler, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { VscTriangleUp } from 'react-icons/vsc';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Color } from '../../theme';
+import Message from '../Message';
+import Image from 'next/image';
+import { AiOutlineSwapRight } from 'react-icons/ai';
+import { removeItem } from '../../slices/cartList';
 
 const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
   display: none;
@@ -30,6 +34,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
   h2 {
     font-size: 30px;
     font-weight: 700;
+    margin-top: 10px;
   }
 
   & > svg {
@@ -42,17 +47,89 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
 
   div.cartListContainer {
     height: 100%;
-    border: 1px solid black;
     overflow-y: auto;
+
+    ul {
+      transition: 0.4s;
+      background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
+      padding: 10px;
+      overflow-x: hidden;
+
+      li {
+        display: flex;
+        position: relative;
+        gap: 10px;
+        margin: 20px 0;
+        padding: 10px 0;
+        justify-content: flex-start;
+        align-items: center;
+        transition: 0.4s;
+        border-radius: 10px;
+        transform: translateX(0px);
+        opacity: 1;
+        background-color: ${({ isDark }) => (isDark ? Color.brown : 'white')};
+
+        div.right {
+          width: calc(100% - 100px);
+          h4 {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+          }
+
+          div.dOptions {
+            display: flex;
+            gap: 30px;
+
+            p {
+              font-weight: 600;
+              color: lightgray;
+            }
+          }
+        }
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+
+        & > button {
+          position: absolute;
+          right: 10px;
+          top: calc(50% - 19px);
+          border: none;
+          background-color: transparent;
+          border-radius: 30px;
+          height: 38px;
+          transition: all 0.4s;
+        }
+
+        &.remove {
+          transform: translateX(100px);
+          opacity: 0;
+        }
+      }
+    }
   }
 
-  button {
+  & > button {
     border: none;
     background-color: ${Color.softBrown};
     color: white;
     font-weight: 500;
     padding: 10px;
     font-size: 18px;
+    border-radius: 8px;
+  }
+
+  & > p {
+    font-weight: 700;
+    font-size: 20px;
+    text-align: right;
   }
 `;
 
@@ -60,9 +137,14 @@ const MobileCart = () => {
   const [open, setOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const isDark = useAppSelector((state) => state.isDark);
-  const cartList = useAppSelector((state) => state.cartList);
+  const {
+    isDark,
+    cartList,
+    message: { isChange },
+  } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     cartRef.current && setHeight(cartRef.current.getBoundingClientRect().height);
@@ -78,12 +160,14 @@ const MobileCart = () => {
       0: { clientY, target },
     },
   }) => {
-    const targetElement = (target as HTMLElement).closest('div.mCart');
-    startY = clientY;
-    time = new Date().getTime();
+    if (!(target as HTMLElement).closest('ul')) {
+      const targetElement = (target as HTMLElement).closest('div.mCart');
+      startY = clientY;
+      time = new Date().getTime();
 
-    (targetElement as HTMLElement).style.transition = '0s';
-    y = (targetElement as HTMLElement).getBoundingClientRect().y;
+      (targetElement as HTMLElement).style.transition = '0s';
+      y = (targetElement as HTMLElement).getBoundingClientRect().y;
+    }
   };
 
   const touchMoveHandler: TouchEventHandler<HTMLDivElement> = ({
@@ -92,12 +176,14 @@ const MobileCart = () => {
     },
     target,
   }) => {
-    const targetElement = (target as HTMLElement).closest('div.mCart');
+    if (!(target as HTMLElement).closest('ul')) {
+      const targetElement = (target as HTMLElement).closest('div.mCart');
 
-    transY = clientY - startY + y - 30;
+      transY = clientY - startY + y - 30;
 
-    if (transY / height <= 0.95 && transY / height >= 0) {
-      (targetElement as HTMLElement).style.transform = `translateY(${transY}px)`;
+      if (transY / height <= 0.95 && transY / height >= 0) {
+        (targetElement as HTMLElement).style.transform = `translateY(${transY}px)`;
+      }
     }
   };
 
@@ -107,18 +193,37 @@ const MobileCart = () => {
       0: { clientY },
     },
   }) => {
-    const targetElement = (target as HTMLElement).closest('div.mCart');
-    const speed = (clientY - startY) / (new Date().getTime() - time);
-    (targetElement as HTMLElement).style.transition = '0.4s';
+    if (!(target as HTMLElement).closest('ul')) {
+      const targetElement = (target as HTMLElement).closest('div.mCart');
+      const speed = (clientY - startY) / (new Date().getTime() - time);
+      (targetElement as HTMLElement).style.transition = '0.4s';
 
-    if ((transY / height > 0.55 && speed > -0.4) || speed > 0.4) {
-      (targetElement as HTMLElement).style.transform = `translateY(95%)`;
-      setOpen(false);
-    } else if (transY / height <= 0.55 || speed < -0.4) {
-      (targetElement as HTMLElement).style.transform = `translateY(0%)`;
-      setOpen(true);
+      if ((transY / height > 0.55 && speed > -0.4) || speed > 0.4) {
+        (targetElement as HTMLElement).style.transform = `translateY(95%)`;
+        setOpen(false);
+      } else if (transY / height <= 0.55 || speed < -0.4) {
+        (targetElement as HTMLElement).style.transform = `translateY(0%)`;
+        setOpen(true);
+      }
     }
   };
+
+  const removeHandler = (i: number) => {
+    setTimeout(() => dispatch(removeItem(i)), 400);
+  };
+
+  useEffect(() => {
+    setTotalPrice(
+      cartList.reduce((acc, cur) => {
+        let optionPrice: number = cur.item.price;
+
+        cur.isIce && (optionPrice += 500);
+        cur.isSizeUp && (optionPrice += 1500);
+
+        return acc + optionPrice;
+      }, 0)
+    );
+  }, [cartList.length]);
 
   return (
     <StyledMCart //
@@ -130,20 +235,47 @@ const MobileCart = () => {
       isDark={isDark}
       open={open}
     >
+      {isChange && <Message />}
       <VscTriangleUp width={20} color='gray' />
       <h2>Cart</h2>
       <div className='cartListContainer'>
         <ul>
           {cartList.map((e, i) => (
             <li key={i}>
-              <h4>{e.item.krName}</h4>
-              <p>{e.isIce ? 'Ice' : 'Hot'}</p>
-              <p>{e.isSizeUp ? 'Large' : 'Tall'}</p>
+              <Image src={e.item.imageUrl} alt='some item' width={60} height={55} />
+              <div className='right'>
+                <h4>{e.item.krName}</h4>
+                <div className='dOptions'>
+                  <p>{e.isIce ? 'Ice' : 'Hot'}</p>
+                  <p>{e.isSizeUp ? 'Big' : 'Tall'}</p>
+                </div>
+              </div>
+              <button
+                onClick={(ev) => {
+                  removeHandler(i);
+                  const liElement = (ev.target as HTMLElement).closest('div.cartListContainer > ul > li');
+                  if (liElement) {
+                    liElement.classList.add('remove');
+                    (liElement as HTMLElement).style.transition = '0.4s';
+                    setTimeout(() => {
+                      (liElement as HTMLElement).style.transition = '0s';
+                      liElement.classList.remove('remove');
+                    }, 400);
+                  }
+                }}
+              >
+                <AiOutlineSwapRight //
+                  color={isDark ? 'white' : 'black'}
+                  size={24}
+                  style={{ transition: '0.4s' }}
+                />
+              </button>
             </li>
           ))}
         </ul>
       </div>
-      <button>제출</button>
+      <p>Total Cost {totalPrice}</p>
+      <button>결제하기</button>
     </StyledMCart>
   );
 };

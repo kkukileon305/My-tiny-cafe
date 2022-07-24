@@ -3,6 +3,7 @@ import { isTakeout } from './slices/isTakeout';
 import { cartList } from './slices/cartList';
 import { isDark } from './slices/isDark';
 import { curMenu } from './slices/curMenu';
+import { message } from './slices/message';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     cartList: cartList.reducer,
     isDark: isDark.reducer,
     curMenu: curMenu.reducer,
+    message: message.reducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

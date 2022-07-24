@@ -16,6 +16,7 @@ import { GiIceCube } from 'react-icons/gi';
 import { BiCoffeeTogo } from 'react-icons/bi';
 import { MdOutlineCoffee } from 'react-icons/md';
 import { addItem } from '../../slices/cartList';
+import { setIsChange, setIsMessage } from '../../slices/message';
 
 const Details = () => {
   const isDark = useAppSelector((state) => state.isDark);
@@ -38,6 +39,11 @@ const Details = () => {
     }
   }, [router.isReady]);
 
+  useEffect(() => {
+    dispatch(setIsMessage(false));
+    dispatch(setIsChange(false));
+  }, []);
+
   const addCart: MouseEventHandler<HTMLButtonElement> = () => {
     detail &&
       dispatch(
@@ -47,7 +53,7 @@ const Details = () => {
           item: detail,
         })
       );
-
+    dispatch(setIsChange(true));
     router.push('/menu');
   };
 
@@ -89,22 +95,22 @@ const Details = () => {
                       <h4>온도</h4>
                       <div className='ice'>
                         <button onClick={() => setIsIce(false)}>
-                          <FaMugHot size={50} color={isDark ? 'white' : 'black'} />
+                          <FaMugHot size={50} color={isDark ? 'white' : 'black'} style={{ transition: '0.4s' }} />
                           <p>Hot</p>
                         </button>
                         <button onClick={() => setIsIce(true)}>
-                          <GiIceCube size={50} color={isDark ? 'white' : 'black'} />
+                          <GiIceCube size={50} color={isDark ? 'white' : 'black'} style={{ transition: '0.4s' }} />
                           <p>Ice</p>
                         </button>
                       </div>
                       <h4>사이즈</h4>
                       <div className='size'>
                         <button onClick={() => setIsBig(false)}>
-                          <MdOutlineCoffee size={50} color={isDark ? 'white' : 'black'} />
+                          <MdOutlineCoffee size={50} color={isDark ? 'white' : 'black'} style={{ transition: '0.4s' }} />
                           <p>Tall</p>
                         </button>
                         <button onClick={() => setIsBig(true)}>
-                          <BiCoffeeTogo size={50} color={isDark ? 'white' : 'black'} />
+                          <BiCoffeeTogo size={50} color={isDark ? 'white' : 'black'} style={{ transition: '0.4s' }} />
                           <p>Big</p>
                         </button>
                       </div>
