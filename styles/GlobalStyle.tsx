@@ -11,7 +11,7 @@ const StyledGlobal = createGlobalStyle<{
     overscroll-behavior: contain;
 
     body {
-
+      overscroll-behavior-y: none;
       #__next {
         width: 100vw;
         height: 100vh;
