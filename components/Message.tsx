@@ -55,7 +55,7 @@ type MessageProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Message = ({ setOpen }: MessageProps) => {
+const Message = () => {
   const message = useAppSelector((state) => state.message.isMessage);
   const dispatch = useAppDispatch();
 
@@ -66,11 +66,7 @@ const Message = ({ setOpen }: MessageProps) => {
     }, 2000);
   }, []);
 
-  return (
-    <StyledMessage visible={message} onClick={() => setOpen(true)}>
-      카트 확인!
-    </StyledMessage>
-  );
+  return <StyledMessage visible={message}>카트 확인!</StyledMessage>;
 };
 
 export default Message;
