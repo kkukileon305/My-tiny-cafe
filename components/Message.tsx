@@ -51,10 +51,6 @@ const StyledMessage = styled.div<{
   }
 `;
 
-type MessageProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>;
-};
-
 const Message = () => {
   const message = useAppSelector((state) => state.message.isMessage);
   const dispatch = useAppDispatch();
