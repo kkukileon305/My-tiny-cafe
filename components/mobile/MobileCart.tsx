@@ -23,7 +23,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     border-radius: 10px;
     border: 1px solid ${({ isDark }) => (isDark ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)')};
     box-shadow: ${({ isDark }) => (isDark ? '' : '0 0 4px 4px rgba(0,0,0,0.1)')};
-    transform: translateY(${({ open }) => (open ? '0%' : '95%')});
+    transform: translateY(${({ open }) => (open ? '0%' : '93%')});
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
