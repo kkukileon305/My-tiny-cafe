@@ -15,7 +15,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     display: block;
     position: fixed;
     width: 98vw;
-    height: calc(100vh - 30px);
+    height: calc(100vh - 60px);
     left: 1vw;
     bottom: 0px;
     background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
@@ -179,7 +179,7 @@ const MobileCart = () => {
     if (!(target as HTMLElement).closest('ul')) {
       const targetElement = (target as HTMLElement).closest('div.mCart');
 
-      transY = clientY - startY + y - 30;
+      transY = clientY - startY + y - 60;
 
       if (transY / height <= 0.95 && transY / height >= 0) {
         (targetElement as HTMLElement).style.transform = `translateY(${transY}px)`;
