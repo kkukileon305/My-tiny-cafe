@@ -23,7 +23,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     border-radius: 10px;
     border: 1px solid ${({ isDark }) => (isDark ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)')};
     box-shadow: ${({ isDark }) => (isDark ? '' : '0 0 4px 4px rgba(0,0,0,0.1)')};
-    transform: translateY(95%);
+    transform: translateY(${({ open }) => (open ? '0%' : '95%')});
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -71,6 +71,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
 
         div.right {
           width: calc(100% - 100px);
+
           h4 {
             font-weight: 600;
             font-size: 18px;
@@ -150,64 +151,6 @@ const MobileCart = () => {
     cartRef.current && setHeight(cartRef.current.getBoundingClientRect().height);
   }, [cartRef.current]);
 
-  let y = 0,
-    startY = 0,
-    transY = 0,
-    time = 0;
-
-  const touchStartHandler: TouchEventHandler<HTMLDivElement> = ({
-    changedTouches: {
-      0: { clientY, target },
-    },
-  }) => {
-    if (!(target as HTMLElement).closest('ul')) {
-      const targetElement = (target as HTMLElement).closest('div.mCart');
-      startY = clientY;
-      time = new Date().getTime();
-
-      (targetElement as HTMLElement).style.transition = '0s';
-      y = (targetElement as HTMLElement).getBoundingClientRect().y;
-    }
-  };
-
-  const touchMoveHandler: TouchEventHandler<HTMLDivElement> = ({
-    changedTouches: {
-      0: { clientY },
-    },
-    target,
-  }) => {
-    if (!(target as HTMLElement).closest('ul')) {
-      const targetElement = (target as HTMLElement).closest('div.mCart');
-
-      transY = clientY - startY + y - 60;
-
-      if (transY / height <= 0.95 && transY / height >= 0) {
-        (targetElement as HTMLElement).style.transform = `translateY(${transY}px)`;
-      }
-    }
-  };
-
-  const touchEndHandler: TouchEventHandler<HTMLDivElement> = ({
-    target,
-    changedTouches: {
-      0: { clientY },
-    },
-  }) => {
-    if (!(target as HTMLElement).closest('ul')) {
-      const targetElement = (target as HTMLElement).closest('div.mCart');
-      const speed = (clientY - startY) / (new Date().getTime() - time);
-      (targetElement as HTMLElement).style.transition = '0.4s';
-
-      if ((transY / height > 0.55 && speed > -0.4) || speed > 0.4) {
-        (targetElement as HTMLElement).style.transform = `translateY(95%)`;
-        setOpen(false);
-      } else if (transY / height <= 0.55 || speed < -0.4) {
-        (targetElement as HTMLElement).style.transform = `translateY(0%)`;
-        setOpen(true);
-      }
-    }
-  };
-
   const removeHandler = (i: number) => {
     setTimeout(() => dispatch(removeItem(i)), 400);
   };
@@ -227,16 +170,13 @@ const MobileCart = () => {
 
   return (
     <StyledMCart //
-      onTouchStart={touchStartHandler}
-      onTouchMove={touchMoveHandler}
-      onTouchEnd={touchEndHandler}
       ref={cartRef}
       className='mCart'
       isDark={isDark}
       open={open}
     >
       {isChange && <Message />}
-      <VscTriangleUp width={20} color='gray' />
+      <VscTriangleUp width={20} color={isDark ? 'white' : 'black'} onClick={() => setOpen(!open)} />
       <h2>Cart</h2>
       <div className='cartListContainer'>
         <ul>

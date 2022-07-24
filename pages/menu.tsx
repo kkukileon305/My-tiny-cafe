@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { TouchEventHandler, useEffect, useState } from 'react';
 import Aside from '../components/Aside';
 import Gnb, { MenuTitle } from '../components/menu/Gnb';
 import Header from '../components/Header';

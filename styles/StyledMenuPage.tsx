@@ -11,7 +11,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean; modalTouch: boolean }>`
     width: calc(100vw - 170px);
 
     div.menuContainer {
-      overflow-y: ${({ modalTouch }) => (modalTouch ? 'hidden' : 'scroll')};
+      overflow-y: scroll;
       height: calc(100% - 33px);
       transition: 0.4s;
       background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
