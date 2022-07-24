@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Color } from '../theme';
 
-const StyledMenuPage = styled.main<{ isDark: boolean }>`
+const StyledMenuPage = styled.main<{ isDark: boolean; modalTouch: boolean }>`
   height: calc(100vh - 36px);
   display: flex;
   overflow-y: hidden;
@@ -11,7 +11,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean }>`
     width: calc(100vw - 170px);
 
     div.menuContainer {
-      overflow-y: scroll;
+      overflow-y: ${({ modalTouch }) => (modalTouch ? 'hidden' : 'scroll')};
       height: calc(100% - 33px);
       transition: 0.4s;
       background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};

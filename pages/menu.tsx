@@ -20,7 +20,10 @@ const MenuPage = () => {
   const isDark = useAppSelector((state) => state.isDark);
   const dispatch = useAppDispatch();
 
-  const isChange = useAppSelector((state) => state.message.isChange);
+  const {
+    message: { isChange },
+    modalTouch,
+  } = useAppSelector((state) => state);
 
   useEffect(() => {
     isChange && dispatch(setIsMessage(true));
@@ -49,7 +52,7 @@ const MenuPage = () => {
     <>
       <MobileCart />
       <Header />
-      <StyledMenuPage isDark={isDark}>
+      <StyledMenuPage isDark={isDark} modalTouch={modalTouch}>
         <div className='left'>
           <Gnb curMenu={curMenu} />
           <div className='menuContainer'>
