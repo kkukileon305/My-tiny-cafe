@@ -15,7 +15,7 @@ const StyledSkeleton = styled.div`
   & > ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     row-gap: 60px;
     padding-bottom: 30px;
 

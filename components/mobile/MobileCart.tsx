@@ -23,7 +23,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     border-radius: 10px;
     border: 1px solid ${({ isDark }) => (isDark ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)')};
     box-shadow: ${({ isDark }) => (isDark ? '' : '0 0 4px 4px rgba(0,0,0,0.1)')};
-    transform: translateY(${({ open }) => (open ? '0%' : '93%')});
+    transform: translateY(${({ open }) => (open ? '0%' : '95%')});
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
 
   & > svg {
     position: absolute;
-    left: calc(50% - 10px);
+    left: calc(50% - 15px);
     top: 4px;
     transition: 0.4s;
     transform: rotate(${({ open }) => (open ? '180deg' : '0')});
@@ -131,6 +131,8 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     font-weight: 700;
     font-size: 20px;
     text-align: right;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
@@ -171,7 +173,7 @@ const MobileCart = () => {
       open={open}
     >
       {isChange && <Message setOpen={setOpen} />}
-      <VscTriangleUp width={20} color={isDark ? 'white' : 'black'} onClick={() => setOpen(!open)} />
+      <VscTriangleUp size={30} color={isDark ? 'white' : 'black'} onClick={() => setOpen(!open)} />
       <h2>Cart</h2>
       <div className='cartListContainer'>
         <ul>
@@ -209,7 +211,9 @@ const MobileCart = () => {
           ))}
         </ul>
       </div>
-      <p>Total Cost {totalPrice}</p>
+      <p>
+        Total Cost <span>{totalPrice}</span>
+      </p>
       <button>결제하기</button>
     </StyledMCart>
   );
