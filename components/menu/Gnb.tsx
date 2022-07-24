@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCurMenu } from '../../slices/curMenu';
 import { Color } from '../../theme';
 
 export const MenuTitle = ['coffee', 'latte', 'drinks', 'desserts'];
 
 type GnbProps = {
   curMenu: number;
-  setCurMenu: Dispatch<SetStateAction<number>>;
 };
 
 const StyledGnb = styled.div<{
@@ -53,13 +53,14 @@ const StyledGnb = styled.div<{
   }
 `;
 
-const Gnb = ({ curMenu, setCurMenu }: GnbProps) => {
+const Gnb = ({ curMenu }: GnbProps) => {
   const isDark = useAppSelector((state) => state.isDark);
+  const dispatch = useAppDispatch();
   return (
     <StyledGnb curMenu={curMenu} isDark={isDark}>
       <ul>
         {MenuTitle.map((e, i) => (
-          <li key={i} onClick={() => setCurMenu(i)}>
+          <li key={i} onClick={() => dispatch(setCurMenu(i))}>
             <p>{e}</p>
           </li>
         ))}

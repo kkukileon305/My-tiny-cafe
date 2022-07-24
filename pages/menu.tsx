@@ -9,12 +9,12 @@ import MobileCart from '../components/mobile/MobileCart';
 import getCoffeeData from '../getCoffeeData';
 import StyledMenuPage from '../styles/StyledMenuPage';
 import { Item } from '../type';
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 
 const MenuPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [curMenu, setCurMenu] = useState(0);
-  const [curMenuName, setCurMenuName] = useState('coffee');
+  const [loading, setLoading] = useState(true);
+  const curMenu = useAppSelector((state) => state.curMenu);
+  const [curMenuName, setCurMenuName] = useState(MenuTitle[curMenu]);
   const [menuList, setMenuList] = useState<Item[]>([]);
   const isDark = useAppSelector((state) => state.isDark);
 
@@ -43,7 +43,7 @@ const MenuPage = () => {
       <Header />
       <StyledMenuPage isDark={isDark}>
         <div className='left'>
-          <Gnb curMenu={curMenu} setCurMenu={setCurMenu} />
+          <Gnb curMenu={curMenu} />
           <div className='menuContainer'>
             {loading ? (
               <MenuSkeleton />
