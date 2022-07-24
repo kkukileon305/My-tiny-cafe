@@ -137,7 +137,6 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
 const MobileCart = () => {
   const [open, setOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const {
@@ -146,10 +145,6 @@ const MobileCart = () => {
     message: { isChange },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    cartRef.current && setHeight(cartRef.current.getBoundingClientRect().height);
-  }, [cartRef.current]);
 
   const removeHandler = (i: number) => {
     setTimeout(() => dispatch(removeItem(i)), 400);
@@ -175,7 +170,7 @@ const MobileCart = () => {
       isDark={isDark}
       open={open}
     >
-      {isChange && <Message />}
+      {isChange && <Message setOpen={setOpen} />}
       <VscTriangleUp width={20} color={isDark ? 'white' : 'black'} onClick={() => setOpen(!open)} />
       <h2>Cart</h2>
       <div className='cartListContainer'>
