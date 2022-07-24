@@ -22,7 +22,6 @@ const MenuPage = () => {
 
   const {
     message: { isChange },
-    modalTouch,
   } = useAppSelector((state) => state);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const MenuPage = () => {
     <>
       <MobileCart />
       <Header />
-      <StyledMenuPage isDark={isDark} modalTouch={modalTouch}>
+      <StyledMenuPage isDark={isDark}>
         <div className='left'>
           <Gnb curMenu={curMenu} />
           <div className='menuContainer'>

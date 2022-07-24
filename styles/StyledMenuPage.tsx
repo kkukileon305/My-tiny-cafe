@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Color } from '../theme';
 
-const StyledMenuPage = styled.main<{ isDark: boolean; modalTouch: boolean }>`
+const StyledMenuPage = styled.main<{ isDark: boolean }>`
   height: calc(100vh - 36px);
   display: flex;
   overflow-y: hidden;
