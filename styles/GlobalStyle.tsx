@@ -8,6 +8,7 @@ const StyledGlobal = createGlobalStyle<{
   ${reset}
 
   html {
+    overscroll-behavior: contain;
 
     body {
 
