@@ -73,6 +73,10 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
 
               word-break: keep-all;
               line-height: 1.2;
+
+              @media screen and (min-width: 760px) {
+                font-size: 25px;
+              }
             }
 
             p {
@@ -82,11 +86,14 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
 
               word-break: keep-all;
               line-height: 1.33;
-              font-size: 14px;
+              font-size: 16px;
 
               &:last-of-type {
                 margin-bottom: 20px;
                 color: ${({ isDark }) => (isDark ? 'white' : 'black')};
+                @media screen and (min-width: 760px) {
+                  font-size: 20px;
+                }
               }
             }
 
@@ -104,6 +111,9 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
           h3 {
             font-weight: 600;
             font-size: 18px;
+            @media screen and (min-width: 760px) {
+              font-size: 25px;
+            }
           }
 
           form {
@@ -111,6 +121,9 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
               font-weight: 600;
               margin: 40px 0;
               text-align: center;
+              @media screen and (min-width: 760px) {
+                font-size: 25px;
+              }
             }
 
             div {
@@ -127,6 +140,9 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
 
                 p {
                   margin-top: 4px;
+                  @media screen and (min-width: 760px) {
+                    font-size: 20px;
+                  }
                 }
               }
               &.ice {

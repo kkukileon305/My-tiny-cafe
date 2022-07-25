@@ -64,6 +64,10 @@ const StyledAside = styled.aside<{ isDark: boolean }>`
             p {
               font-weight: 600;
               color: lightgray;
+
+              @media screen and (min-width: 760px) {
+                font-size: 20px;
+              }
             }
           }
         }

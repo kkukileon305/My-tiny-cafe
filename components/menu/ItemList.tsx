@@ -18,6 +18,10 @@ const StyledItem = styled.li<{ isDark: boolean }>`
   h4 {
     font-weight: 600;
     margin-top: 10px;
+
+    @media screen and (min-width: 760px) {
+      font-size: 24px;
+    }
   }
 
   p {

@@ -8,7 +8,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean; searchMode: boolean }>`
   overflow: hidden;
 
   div.left {
-    width: calc(100vw - 170px);
+    width: calc(100vw - 200px);
     overflow-x: hidden;
 
     div.menuContainer {
