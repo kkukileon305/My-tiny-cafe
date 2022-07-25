@@ -1,9 +1,9 @@
 import coffeeData from './coffeeData.json';
 import { Item } from './type';
 
-interface CoffeeData {
+export type CoffeeData = {
   [coffeeType: string]: Item[];
-}
+};
 
 const getCoffeeData = () =>
   new Promise<CoffeeData>((res, rej) => {

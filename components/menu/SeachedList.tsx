@@ -1,39 +1,19 @@
-import styled from 'styled-components';
-import Image from 'next/image';
-import { Item } from '../../type';
 import { useRouter } from 'next/router';
-import { useAppSelector } from '../../hooks';
-import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { CoffeeData } from '../../getCoffeeData';
+import { useAppSelector } from '../../hooks';
+import { Item } from '../../type';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
-const StyledItem = styled.li<{ isDark: boolean }>`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  word-break: keep-all;
-  gap: 10px;
+const StyledItem = styled.li<{ isDark: boolean }>``;
 
-  h4 {
-    font-weight: 600;
-    margin-top: 10px;
-  }
-
-  p {
-    line-height: 1.3;
-    color: ${({ isDark }) => (isDark ? '#666666' : 'lightgray')};
-    font-weight: 600;
-    font-size: 14px;
-  }
-`;
-
-type ItemProps = {
+type SearchedListProps = {
   item: Item;
   data: CoffeeData | undefined;
 };
 
-const ItemList = ({ item, data }: ItemProps) => {
+const SearchedList = ({ item, data }: SearchedListProps) => {
   const router = useRouter();
   const { isDark } = useAppSelector((state) => state);
   const [keyName, setKeyName] = useState<string>();
@@ -72,4 +52,4 @@ const ItemList = ({ item, data }: ItemProps) => {
   );
 };
 
-export default ItemList;
+export default SearchedList;

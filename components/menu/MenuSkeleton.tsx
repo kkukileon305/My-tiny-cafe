@@ -5,10 +5,10 @@ const StyledSkeleton = styled.div`
     width: 100px;
     height: 30px;
     background-color: lightgray;
-    margin: 20px 30px;
+    margin: 30px 30px;
 
     @media screen and (max-width: 350px) {
-      margin: 20px 15px;
+      margin: 30px 15px;
     }
   }
 
@@ -52,10 +52,14 @@ const StyledSkeleton = styled.div`
   }
 `;
 
-const MenuSkeleton = () => {
+type MenuSkeletonProps = {
+  isSearch: boolean;
+};
+
+const MenuSkeleton = ({ isSearch }: MenuSkeletonProps) => {
   return (
     <StyledSkeleton>
-      <div></div>
+      {isSearch ? <h2>SEARCH</h2> : <div></div>}
 
       <ul>
         <li>

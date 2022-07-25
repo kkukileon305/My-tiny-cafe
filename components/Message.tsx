@@ -2,6 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { setIsChange, setIsMessage } from '../slices/message';
+import { BsArrowUpShort } from 'react-icons/bs';
 
 const sizeUp = keyframes`
   0% {
@@ -62,7 +63,11 @@ const Message = () => {
     }, 2000);
   }, []);
 
-  return <StyledMessage visible={message}>카트 확인!</StyledMessage>;
+  return (
+    <StyledMessage visible={message}>
+      카트 확인! <BsArrowUpShort size={16} />
+    </StyledMessage>
+  );
 };
 
 export default Message;

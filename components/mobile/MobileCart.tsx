@@ -7,6 +7,7 @@ import Message from '../Message';
 import Image from 'next/image';
 import { AiOutlineSwapRight } from 'react-icons/ai';
 import { removeItem } from '../../slices/cartList';
+import { BsChevronDoubleUp } from 'react-icons/bs';
 
 const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
   display: none;
@@ -54,6 +55,7 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
       background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
       padding: 10px;
       overflow-x: hidden;
+      padding: 0;
 
       li {
         display: flex;
@@ -182,7 +184,7 @@ const MobileCart = () => {
       0: { clientY, target },
     },
   }) => {
-    if (!(target as HTMLElement).closest('ul') && cartRef.current) {
+    if (!(target as HTMLElement).closest('div.cartListContainer ul') && cartRef.current) {
       cartRef.current.style.transition = '0s';
       startY = clientY;
       time = new Date().getTime();
@@ -195,7 +197,7 @@ const MobileCart = () => {
       0: { clientY, target },
     },
   }) => {
-    if (!(target as HTMLElement).closest('ul') && cartRef.current) {
+    if (!(target as HTMLElement).closest('div.cartListContainer ul') && cartRef.current) {
       const ratio = transY / height;
       transY = clientY - startY + y - 60;
 
@@ -210,18 +212,22 @@ const MobileCart = () => {
       0: { clientY, target },
     },
   }) => {
-    if (!(target as HTMLElement).closest('ul') && cartRef.current) {
+    if (!(target as HTMLElement).closest('div.cartListContainer ul') && cartRef.current) {
       const ratio = transY / height;
       const speed = (clientY - startY) / (new Date().getTime() - time);
 
       if (speed > 0.5) {
         cartRef.current.style.transform = `translateY(93%)`;
+        setOpen(false);
       } else if (speed < -0.5) {
         cartRef.current.style.transform = `translateY(0%)`;
-      } else if (ratio > 0.5) {
+        setOpen(true);
+      } else if (ratio > 0.5 && speed !== 0) {
         cartRef.current.style.transform = `translateY(93%)`;
-      } else if (ratio <= 0.5) {
+        setOpen(false);
+      } else if (ratio <= 0.5 && speed !== 0) {
         cartRef.current.style.transform = `translateY(0%)`;
+        setOpen(true);
       }
 
       cartRef.current.style.transition = '0.4s';
@@ -239,7 +245,7 @@ const MobileCart = () => {
       onTouchEnd={touchEndHandler}
     >
       {isChange && <Message />}
-      <VscTriangleUp size={30} color={isDark ? 'white' : 'black'} />
+      <BsChevronDoubleUp size={30} color={isDark ? 'white' : 'gray'} />
       <h2>Cart</h2>
       <div className='cartListContainer'>
         <ul>
