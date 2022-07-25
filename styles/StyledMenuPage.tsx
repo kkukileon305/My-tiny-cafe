@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Color } from '../theme';
 
 const StyledMenuPage = styled.main<{ isDark: boolean; searchMode: boolean }>`
-  height: calc(100vh - 36px);
+  height: calc(100vh - 50px);
   display: flex;
   overflow: hidden;
 
@@ -14,7 +14,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean; searchMode: boolean }>`
     div.menuContainer {
       overflow-y: hidden;
       overflow-x: hidden;
-      height: calc(100% - 33px);
+      height: calc(100% - 43px);
       transition: 0.4s;
       background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
 

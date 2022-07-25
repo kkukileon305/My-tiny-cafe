@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import ThemeCtrl from './ThemeCtrl';
 
 const StyledHeader = styled.header`
-  height: 36px;
+  height: 40px;
   background-color: ${Color.brown};
   display: flex;
   justify-content: space-between;

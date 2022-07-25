@@ -84,11 +84,13 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
 
           div.dOptions {
             display: flex;
+            align-items: center;
             gap: 30px;
 
             p {
               font-weight: 600;
               color: lightgray;
+              margin: 0;
             }
           }
         }

@@ -25,7 +25,7 @@ const StyledGnb = styled.div<{
   display: flex;
   width: 200%;
   border-bottom: 1px solid lightgray;
-  height: 33px;
+  height: 50px;
   position: relative;
   z-index: 10;
   transition: 0.4s;
@@ -41,6 +41,10 @@ const StyledGnb = styled.div<{
 
     li {
       width: 25%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       p {
         font-weight: 600;
@@ -48,6 +52,11 @@ const StyledGnb = styled.div<{
         padding: 8px 0;
         color: ${({ isDark }) => (isDark ? '#646464' : 'lightgray')};
         transition: 0.4s;
+        font-size: 20px;
+
+        @media screen and (max-width: 360px) {
+          font-size: 17px;
+        }
       }
 
       &:nth-child(${({ curMenu }) => curMenu + 1}) {
@@ -82,6 +91,11 @@ const StyledGnb = styled.div<{
     transition: 0.4s;
     color: ${({ isDark }) => (isDark ? 'white' : 'black')};
     border: none;
+    font-size: 20px;
+
+    @media screen and (max-width: 360px) {
+      font-size: 18px;
+    }
 
     & > svg {
       transition: 0.4s;
@@ -100,7 +114,7 @@ const StyledGnb = styled.div<{
 
   div.search {
     width: 50%;
-    padding: 2px 5px;
+    padding: 4px 5px;
 
     div {
       height: 100%;
@@ -121,6 +135,8 @@ const StyledGnb = styled.div<{
         transition: 0.4s;
         background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
         color: ${({ isDark }) => (isDark ? 'white' : 'black')};
+        font-size: 20px;
+        padding-left: 4px;
 
         &:focus {
           outline: none;
