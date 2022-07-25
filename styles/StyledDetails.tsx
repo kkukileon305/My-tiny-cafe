@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Color } from '../theme';
 
 const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: boolean }>`
-  height: calc(100vh - 36px);
+  height: calc(100vh - 40px);
   display: flex;
   overflow-y: hidden;
 
   div.left {
-    width: calc(100vw - 170px);
+    width: calc(100vw - 200px);
     background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
     transition: 0.4s;
 
@@ -17,7 +17,9 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
     }
     div.btnContainer {
       border-bottom: 1px solid lightgray;
-      height: 33px;
+      height: 50px;
+      display: flex;
+      align-items: center;
 
       svg {
         transition: 0.4s;
@@ -25,7 +27,7 @@ const StyledDetailPage = styled.main<{ isDark: boolean; isBig: boolean; isIce: b
     }
 
     div.detailContainer {
-      height: calc(100vh - 89px);
+      height: calc(100% - 50px);
       overflow-y: auto;
 
       h2 {

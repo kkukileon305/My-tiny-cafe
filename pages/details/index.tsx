@@ -65,7 +65,7 @@ const Details = () => {
         <div className='left'>
           <div className='btnContainer'>
             <BsArrowLeftShort //
-              size={33}
+              size={40}
               color={isDark ? 'white' : Color.brown}
               onClick={() => router.push('/menu')}
             />
