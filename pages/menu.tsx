@@ -20,6 +20,7 @@ const MenuPage = () => {
   const [searchList, setSearchList] = useState<Item[]>([]);
   const [searchMode, setSearchMode] = useState(false);
   const [data, setData] = useState<CoffeeData>();
+  const [timeId, setTimeId] = useState<NodeJS.Timeout>();
 
   const isDark = useAppSelector((state) => state.isDark);
   const dispatch = useAppDispatch();
@@ -52,20 +53,26 @@ const MenuPage = () => {
     setCurMenuName(MenuTitle[curMenu]);
   }, [curMenu]);
 
-  const changeHandler: ChangeEventHandler<HTMLInputElement> = async ({
+  const changeHandler: ChangeEventHandler<HTMLInputElement> = ({
     //
     target: { value },
   }) => {
-    setLoading(true);
+    clearTimeout(timeId);
 
-    try {
-      const { coffee, drinks, latte, desserts } = await getCoffeeData();
-      setSearchList([...coffee.filter((e) => e.krName.includes(value)), ...drinks.filter((e) => e.krName.includes(value)), ...latte.filter((e) => e.krName.includes(value)), ...desserts.filter((e) => e.krName.includes(value))]);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+    setTimeId(
+      setTimeout(async () => {
+        setLoading(true);
+
+        try {
+          const { coffee, drinks, latte, desserts } = await getCoffeeData();
+          setSearchList([...coffee.filter((e) => e.krName.includes(value)), ...drinks.filter((e) => e.krName.includes(value)), ...latte.filter((e) => e.krName.includes(value)), ...desserts.filter((e) => e.krName.includes(value))]);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+      }, 300)
+    );
   };
 
   return (
