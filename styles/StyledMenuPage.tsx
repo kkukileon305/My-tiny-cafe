@@ -14,7 +14,7 @@ const StyledMenuPage = styled.main<{ isDark: boolean; searchMode: boolean }>`
     div.menuContainer {
       overflow-y: hidden;
       overflow-x: hidden;
-      height: calc(100% - 43px);
+      height: calc(100% - 50px);
       transition: 0.4s;
       background-color: ${({ isDark }) => (isDark ? Color.darkBrown : 'white')};
 
