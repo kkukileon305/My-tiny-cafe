@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Color } from '../theme';
 
 const StyledMenuPage = styled.main<{ isDark: boolean; searchMode: boolean }>`
-  height: calc(100vh - 50px);
+  height: calc(100vh - 40px);
   display: flex;
   overflow: hidden;
 
