@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { AiOutlineSwapRight } from 'react-icons/ai';
 import { removeItem } from '../slices/cartList';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const StyledAside = styled.aside<{ isDark: boolean }>`
   width: 200px;
@@ -94,13 +95,21 @@ const StyledAside = styled.aside<{ isDark: boolean }>`
     }
   }
 
-  & > p {
-    font-weight: 700;
-    font-size: 20px;
-    text-align: right;
-    color: white;
-    display: flex;
-    justify-content: space-between;
+  & > div {
+    & > p {
+      font-weight: 700;
+      font-size: 20px;
+      text-align: right;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+
+      &:last-of-type {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+    }
   }
 
   & > button {
@@ -111,13 +120,19 @@ const StyledAside = styled.aside<{ isDark: boolean }>`
     padding: 10px;
     font-size: 18px;
     border-radius: 8px;
+    transition: 0.4s;
+
+    &.loading {
+      color: ${Color.brown};
+    }
   }
 `;
 
 const Aside = () => {
   const dispatch = useAppDispatch();
-  const { cartList, isDark } = useAppSelector((state) => state);
+  const { cartList, isDark, isTakeout } = useAppSelector((state) => state);
   const [totalPrice, setTotalPrice] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     setTotalPrice(
@@ -175,10 +190,20 @@ const Aside = () => {
           ))}
         </ul>
       </div>
-      <p>
-        Total Cost <span>{totalPrice}</span>
-      </p>
-      <button>결제하기</button>
+      <div>
+        <p>
+          Total Cost <span>{totalPrice}</span>
+        </p>
+        <p>{isTakeout ? 'Take out' : 'Eat in'}</p>
+      </div>
+      <button
+        onClick={(e) => {
+          e.currentTarget.classList.add('loading');
+          setTimeout(() => router.push('/payment'), 1000);
+        }}
+      >
+        결제하기
+      </button>
     </StyledAside>
   );
 };

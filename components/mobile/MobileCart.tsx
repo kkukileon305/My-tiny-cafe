@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { AiOutlineSwapRight } from 'react-icons/ai';
 import { removeItem } from '../../slices/cartList';
 import { BsChevronDoubleUp } from 'react-icons/bs';
+import { useRouter } from 'next/router';
 
 const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
   display: none;
@@ -127,14 +128,27 @@ const StyledMCart = styled.div<{ isDark: boolean; open: boolean }>`
     padding: 10px;
     font-size: 18px;
     border-radius: 8px;
+    transition: 0.4s;
+
+    &.loading {
+      color: ${Color.brown};
+    }
   }
 
-  & > p {
-    font-weight: 700;
-    font-size: 20px;
-    text-align: right;
-    display: flex;
-    justify-content: space-between;
+  & > div {
+    p {
+      font-weight: 700;
+      font-size: 20px;
+      text-align: right;
+      display: flex;
+      justify-content: space-between;
+
+      &:last-of-type {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+    }
   }
 `;
 
@@ -143,11 +157,13 @@ const MobileCart = () => {
   const cartRef = useRef<HTMLDivElement>(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [height, setHeight] = useState(0);
+  const router = useRouter();
 
   const {
     isDark,
     cartList,
     message: { isChange },
+    isTakeout,
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
@@ -283,10 +299,20 @@ const MobileCart = () => {
           ))}
         </ul>
       </div>
-      <p>
-        Total Cost <span>{totalPrice}</span>
-      </p>
-      <button>결제하기</button>
+      <div>
+        <p>
+          Total Cost <span>{totalPrice}</span>
+        </p>
+        <p>{isTakeout ? 'Take out' : 'Eat in'}</p>
+      </div>
+      <button
+        onClick={(e) => {
+          e.currentTarget.classList.add('loading');
+          setTimeout(() => router.push('/payment'), 1000);
+        }}
+      >
+        결제하기
+      </button>
     </StyledMCart>
   );
 };

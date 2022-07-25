@@ -14,6 +14,7 @@ type GnbProps = {
   setSearchMode: Dispatch<SetStateAction<boolean>>;
   searchMode: boolean;
   changeHandler: ChangeEventHandler<HTMLInputElement>;
+  setSearchList: Dispatch<SetStateAction<Item[]>>;
 };
 
 const StyledGnb = styled.div<{
@@ -133,7 +134,7 @@ const StyledGnb = styled.div<{
   }
 `;
 
-const Gnb = ({ curMenu, setSearchMode, searchMode, changeHandler }: GnbProps) => {
+const Gnb = ({ curMenu, setSearchMode, searchMode, changeHandler, setSearchList }: GnbProps) => {
   const isDark = useAppSelector((state) => state.isDark);
   const dispatch = useAppDispatch();
 
@@ -163,7 +164,12 @@ const Gnb = ({ curMenu, setSearchMode, searchMode, changeHandler }: GnbProps) =>
         Search <BiSearchAlt2 size={20} />
       </button>
 
-      <button onClick={() => setSearchMode(false)}>
+      <button
+        onClick={() => {
+          setSearchMode(false);
+          setSearchList([]);
+        }}
+      >
         <AiOutlineDoubleLeft size={20} />
       </button>
     </StyledGnb>

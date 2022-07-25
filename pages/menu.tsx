@@ -86,6 +86,7 @@ const MenuPage = () => {
             setSearchMode={setSearchMode}
             searchMode={searchMode}
             changeHandler={changeHandler}
+            setSearchList={setSearchList}
           />
           <div className='menuContainer'>
             <div>
