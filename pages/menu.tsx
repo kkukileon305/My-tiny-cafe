@@ -11,7 +11,6 @@ import StyledMenuPage from '../styles/StyledMenuPage';
 import { Item } from '../type';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { setIsMessage } from '../slices/message';
-import SearchedList from '../components/menu/SeachedList';
 
 const MenuPage = () => {
   const [loading, setLoading] = useState(true);
